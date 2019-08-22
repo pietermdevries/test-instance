@@ -58,22 +58,27 @@ view: order_items {
   measure: sum {
     type: sum
     sql: ${sale_price} ;;
+    value_format_name: usd_0
   }
   measure: avg {
     type: average
     sql: ${sale_price} ;;
+    value_format_name: usd_0
   }
   measure: median {
     type: median
     sql: ${sale_price} ;;
+    value_format_name: usd_0
   }
   measure: min {
     type: min
     sql: ${sale_price} ;;
+    value_format_name: usd_0
   }
   measure: max {
     type: max
     sql: ${sale_price} ;;
+    value_format_name: usd_0
   }
 
 }
