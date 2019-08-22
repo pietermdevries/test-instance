@@ -48,7 +48,7 @@ view: order_items {
         WHEN ${sale_price} > 75 THEN 'Good Stuff!'
         WHEN ${sale_price} > 25 THEN 'Ok Man'
         WHEN ${sale_price} > 10 THEN 'Basic B'
-        ELSE 'Gutter Level' NULL END ;;
+        ELSE 'Gutter Level' END ;;
   }
 
   measure: count {
