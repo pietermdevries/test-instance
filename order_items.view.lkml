@@ -57,23 +57,23 @@ view: order_items {
   }
   measure: sum {
     type: sum
-    drill_fields: [id,orders.id,inventory_item.id]
+    sql: ${sale_price} ;;
   }
   measure: avg {
     type: average
-    drill_fields: [id,orders.id,inventory_item.id]
+    sql: ${sale_price} ;;
   }
   measure: median {
     type: median
-    drill_fields: [id,orders.id,inventory_item.id]
+    sql: ${sale_price} ;;
   }
   measure: min {
     type: min
-    drill_fields: [id,orders.id,inventory_item.id]
+    sql: ${sale_price} ;;
   }
   measure: max {
     type: max
-    drill_fields: [id,orders.id,inventory_item.id]
+    sql: ${sale_price} ;;
   }
 
 }
