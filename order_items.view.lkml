@@ -55,4 +55,25 @@ view: order_items {
     type: count
     drill_fields: [id, orders.id, inventory_items.id]
   }
+  measure: sum {
+    type: sum
+    drill_fields: [id,orders.id,inventory_item.id]
+  }
+  measure: avg {
+    type: average
+    drill_fields: [id,orders.id,inventory_item.id]
+  }
+  measure: median {
+    type: median
+    drill_fields: [id,orders.id,inventory_item.id]
+  }
+  measure: min {
+    type: min
+    drill_fields: [id,orders.id,inventory_item.id]
+  }
+  measure: max {
+    type: max
+    drill_fields: [id,orders.id,inventory_item.id]
+  }
+
 }
