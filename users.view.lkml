@@ -23,6 +23,14 @@ view: users {
     sql: ${TABLE}.country ;;
   }
 
+  measure: customers_by_state {
+    type: count
+    filters: {
+      field: state
+      value: "-California, -Nevada, -Washington, -Oregon"
+    }
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -59,6 +67,7 @@ view: users {
 
   dimension: state {
     type: string
+    map_layer_name: us_states
     sql: ${TABLE}.state ;;
   }
 

@@ -40,7 +40,7 @@ view: order_items {
 
   dimension: is_cheap {
     type:  yesno
-    sql: ${sale_price}<3;;
+    sql: ${sale_price}<15;;
   }
 
   dimension: price_bracket {
