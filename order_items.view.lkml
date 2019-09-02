@@ -43,6 +43,8 @@ view: order_items {
     sql: ${sale_price}<15;;
   }
 
+
+
   dimension: price_bracket {
     sql: CASE WHEN ${sale_price} > 100 THEN 'Top Shelf'
         WHEN ${sale_price} > 75 THEN 'Good Stuff!'
@@ -79,6 +81,12 @@ view: order_items {
     type: max
     sql: ${sale_price} ;;
     value_format_name: usd_0
+  }
+
+  measure: avgofmed {
+    type: number
+    sql: ${avg}/${median} ;;
+    value_format: "#,##0.00"
   }
 
 }

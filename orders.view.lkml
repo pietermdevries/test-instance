@@ -23,6 +23,18 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: date_formatted {
+    group_label: "Created"  label: "Date"
+    sql: ${created_date} ;;
+    html: {{ rendered_value | date: "%b %d, %y" }};;
+  }
+
+  dimension: week_formatted {
+    group_label: "Created" label: "Week"
+    sql: ${created_date} ;;
+    html: {{rendered_value | date: "Week %U (%b %d)"}};;
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;

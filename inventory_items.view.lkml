@@ -26,6 +26,11 @@ view: inventory_items {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: closed_sale {
+    type: yesno
+    sql: ${sold_raw}>1 ;;
+  }
+
   dimension: product_id {
     type: number
     # hidden: yes
@@ -50,4 +55,5 @@ view: inventory_items {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]
   }
+
 }
