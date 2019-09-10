@@ -1,6 +1,8 @@
 view: order_items {
   sql_table_name: demo_db.order_items ;;
 
+
+
   dimension: id {
     primary_key: yes
     type: number
@@ -26,6 +28,7 @@ view: order_items {
       time,
       date,
       week,
+      day_of_week,
       month,
       quarter,
       year
@@ -42,8 +45,6 @@ view: order_items {
     type:  yesno
     sql: ${sale_price}<15;;
   }
-
-
 
   dimension: price_bracket {
     sql: CASE WHEN ${sale_price} > 100 THEN 'Top Shelf'
@@ -88,5 +89,32 @@ view: order_items {
     sql: ${avg}/${median} ;;
     value_format: "#,##0.00"
   }
+
+##              ##
+## LIQUID STUFF ##
+##              ##
+
+  measure: liquid_profit {
+    view_label: "Liquid_Testing"
+    type: number
+    sql: sum(${sale_price}) - ${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: <font color="green">{{rendered_value}}</font> ;;
+  }
+
+measure: cond_liquid_profit {
+  view_label: "Liquid_Testing"
+  type: number
+  sql:  sum(${sale_price}) - ${inventory_items.total_cost} ;;
+  value_format_name: usd
+   html: {% if value >= 75000 %}
+  <font color="green">{{rendered_value}}</font>
+  {% elsif value >= 50000 and value < 75000 %}
+  <font color="goldenrod">{{rendered_value}}</font>
+  {% else %}
+  <font color="red">{{rendered_value}}</font>
+  {% endif %}
+  ;;
+}
 
 }

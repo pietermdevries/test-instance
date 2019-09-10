@@ -2,12 +2,12 @@ view: user_order_facts {
   derived_table: {
     sql: SELECT
         user_id
-        , COUNT(DISTINCT order_id) AS lifetime_orders
+        , COUNT(DISTINCT orders.id) AS lifetime_orders
         , SUM(sale_price) AS lifetime_revenue
         , MIN(NULLIF(created_at,0)) AS first_order
         , MAX(NULLIF(created_at,0)) AS latest_order
-        , COUNT(DISTINCT DATE_TRUNC('month', NULLIF(created_at,0))) AS number_of_distinct_months_with_orders
       FROM order_items
+      JOIN orders on order_items.order_id = orders.id
       GROUP BY user_id
        ;;
   }
@@ -33,7 +33,7 @@ view: user_order_facts {
   dimension: days_as_customer {
     description: "Days between first and latest order"
     type: number
-    sql: DATEDIFF('day', ${TABLE}.first_order, ${TABLE}.latest_order)+1 ;;
+    sql: DATEDIFF(${TABLE}.first_order, ${TABLE}.latest_order)+1 ;;
   }
 
   dimension: days_as_customer_tiered {
@@ -65,11 +65,6 @@ view: user_order_facts {
     type: average
     value_format_name: decimal_2
     sql: ${lifetime_orders} ;;
-  }
-
-  dimension: distinct_months_with_orders {
-    type: number
-    sql: ${TABLE}.number_of_distinct_months_with_orders ;;
   }
 
   dimension: lifetime_revenue {

@@ -56,4 +56,28 @@ view: inventory_items {
     drill_fields: [id, products.item_name, products.id, order_items.count]
   }
 
+  measure: total_cost {
+    type: sum
+    sql: ${cost} ;;
+  }
+
+##              ##
+## LIQUID STUFF ##
+##              ##
+
+  dimension_group: liquid_date1 {
+    view_label: "Liquid_Testing"
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${created_raw} ;;
+    html: <p style="color: #166088; background-color: #B3F5F7; font-size: 150%; font-weight: bold; text-align:center">{{value}}</p>  ;;
+}
 }
